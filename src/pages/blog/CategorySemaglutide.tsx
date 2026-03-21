@@ -3,14 +3,38 @@ import Footer from "@/components/Footer";
 import { Card } from "@/components/ui/card";
 import { Link } from "@/compat/react-router-dom";
 import { blogPosts } from "@/data/blogPosts";
-import { Calendar, Clock, ArrowRight } from "lucide-react";
+import { Calendar, Clock, ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import { Helmet } from "@/compat/react-helmet-async";
 import { Button } from "@/components/ui/button";
+import { getSortedBlogPosts } from "@/lib/blog/discovery";
+import { useMemo, useState } from "react";
+
+const POSTS_PER_PAGE = 12;
+const formatDateUTC = (value: string) =>
+  new Intl.DateTimeFormat("en-US", {
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+    timeZone: "UTC",
+  }).format(new Date(`${value}T00:00:00Z`));
 
 const CategorySemaglutide = () => {
-  const semaglutidePosts = blogPosts.filter(post => 
-    post.title.toLowerCase().includes('semaglutide') || 
-    post.slug.includes('semaglutide')
+  const [currentPage, setCurrentPage] = useState(1);
+  const semaglutidePosts = useMemo(
+    () =>
+      getSortedBlogPosts(
+        blogPosts.filter(
+          (post) =>
+            post.title.toLowerCase().includes("semaglutide") ||
+            post.slug.includes("semaglutide"),
+        ),
+      ),
+    [],
+  );
+  const totalPages = Math.ceil(semaglutidePosts.length / POSTS_PER_PAGE);
+  const currentPosts = semaglutidePosts.slice(
+    (currentPage - 1) * POSTS_PER_PAGE,
+    currentPage * POSTS_PER_PAGE,
   );
 
   return (
@@ -42,15 +66,10 @@ const CategorySemaglutide = () => {
               <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
                 Everything you need to know about semaglutide (Wegovy, Ozempic) for weight loss. Evidence-based guides from medical experts.
               </p>
-              <div className="mt-6">
-                <span className="text-sm text-muted-foreground">
-                  {semaglutidePosts.length} articles
-                </span>
-              </div>
             </header>
 
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-              {semaglutidePosts.map((post) => (
+              {currentPosts.map((post) => (
                 <Link key={post.slug} to={post.path}>
                   <Card className="p-6 h-full hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
                     <div className="flex items-center gap-2 text-xs text-muted-foreground mb-3">
@@ -69,7 +88,7 @@ const CategorySemaglutide = () => {
                         <div className="flex items-center gap-1">
                           <Calendar className="h-3 w-3" />
                           <time dateTime={post.date}>
-                            {new Date(post.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+                            {formatDateUTC(post.date)}
                           </time>
                         </div>
                         <div className="flex items-center gap-1">
@@ -83,6 +102,43 @@ const CategorySemaglutide = () => {
                 </Link>
               ))}
             </div>
+
+            {totalPages > 1 && (
+              <div className="flex items-center justify-center gap-4 mt-12 mb-12">
+                <Button
+                  variant="outline"
+                  onClick={() => setCurrentPage((prev) => Math.max(1, prev - 1))}
+                  disabled={currentPage === 1}
+                  className="gap-2"
+                >
+                  <ChevronLeft className="h-4 w-4" />
+                  Previous
+                </Button>
+
+                <div className="flex items-center gap-2 flex-wrap justify-center">
+                  {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+                    <Button
+                      key={page}
+                      variant={currentPage === page ? "default" : "outline"}
+                      onClick={() => setCurrentPage(page)}
+                      className="w-10 h-10 p-0"
+                    >
+                      {page}
+                    </Button>
+                  ))}
+                </div>
+
+                <Button
+                  variant="outline"
+                  onClick={() => setCurrentPage((prev) => Math.min(totalPages, prev + 1))}
+                  disabled={currentPage === totalPages}
+                  className="gap-2"
+                >
+                  Next
+                  <ChevronRight className="h-4 w-4" />
+                </Button>
+              </div>
+            )}
 
             <Card className="p-8 bg-gradient-to-br from-primary to-primary/90 text-primary-foreground text-center">
               <h2 className="text-3xl font-bold mb-4">Ready to Start Your Journey?</h2>

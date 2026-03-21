@@ -57,15 +57,19 @@ const Blog = () => {
   const startIndex = (currentPage - 1) * POSTS_PER_PAGE;
   const endIndex = startIndex + POSTS_PER_PAGE;
   const currentPosts = filteredPosts.slice(startIndex, endIndex);
-  const activeLabel =
-    selectedCategory === "All"
-      ? `Showing all ${filteredPosts.length} articles`
-      : `Showing ${filteredPosts.length} ${selectedCategory.toLowerCase()} articles`;
-
   // Reset to page 1 when category changes
   const handleCategoryChange = (category: string) => {
     setSelectedCategory(category);
     setCurrentPage(1);
+
+    if (typeof window !== "undefined") {
+      requestAnimationFrame(() => {
+        document.getElementById("blog-posts-grid")?.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      });
+    }
   };
   return (
     <div className="min-h-screen bg-background">
@@ -136,13 +140,12 @@ const Blog = () => {
                   </button>
                 ))}
               </div>
-              <p className="mt-6 text-center text-sm text-muted-foreground">{activeLabel}</p>
             </div>
           </div>
         </section>
 
         {/* Blog Posts Grid */}
-        <section className="py-20">
+        <section id="blog-posts-grid" className="py-20">
           <div className="container mx-auto px-4">
             <div className="max-w-6xl mx-auto">
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
