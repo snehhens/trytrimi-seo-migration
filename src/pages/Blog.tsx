@@ -90,9 +90,6 @@ const Blog = () => {
         <section className="py-20 bg-gradient-to-br from-primary/5 to-secondary/5">
           <div className="container mx-auto px-4">
             <div className="max-w-3xl mx-auto text-center">
-              <Badge variant="secondary" className="mb-6 px-4 py-1 text-sm">
-                200+ expert GLP-1 guides built for discovery, trust, and action
-              </Badge>
               <h1 className="text-5xl md:text-6xl font-bold text-foreground mb-6">
                 Weight Loss
                 <span className="block text-secondary mt-2">Insights & Education</span>
@@ -100,117 +97,6 @@ const Blog = () => {
               <p className="text-xl text-muted-foreground">
                 Expert guidance on tirzepatide, semaglutide, and achieving your weight loss goals with science-backed information.
               </p>
-              <div className="mt-8 flex flex-wrap justify-center gap-3 text-sm text-muted-foreground">
-                <span className="rounded-full bg-background/80 px-4 py-2 shadow-sm">{blogPosts.length}+ indexed articles</span>
-                <span className="rounded-full bg-background/80 px-4 py-2 shadow-sm">Comparison, safety, cost, and results clusters</span>
-                <span className="rounded-full bg-background/80 px-4 py-2 shadow-sm">Updated for high-intent GLP-1 searches</span>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section className="py-16 border-b border-border">
-          <div className="container mx-auto px-4">
-            <div className="max-w-6xl mx-auto">
-              <div className="flex items-center gap-3 mb-8">
-                <Sparkles className="h-5 w-5 text-secondary" />
-                <h2 className="text-3xl font-bold text-foreground">Start with high-impact guides</h2>
-              </div>
-              <div className="grid lg:grid-cols-3 gap-6">
-                {featuredPosts.map((post) => (
-                  <Card key={post.slug} className="h-full overflow-hidden border-secondary/20 bg-gradient-to-br from-background to-secondary/5">
-                    <div className="p-6 h-full flex flex-col">
-                      <div className="flex items-center justify-between gap-4 text-sm text-muted-foreground mb-4">
-                        <Badge variant="outline">{post.category}</Badge>
-                        <span>{formatDateUTC(post.modifiedDate || post.date)}</span>
-                      </div>
-                      <h2 className="text-2xl font-bold text-foreground mb-3 line-clamp-3">{post.title}</h2>
-                      <p className="text-muted-foreground mb-6 line-clamp-4">{post.excerpt}</p>
-                      <div className="mt-auto flex items-center justify-between">
-                        <ReadingTime minutes={post.readTimeMinutes || parseInt(post.readTime) || 10} />
-                        <Link to={post.path}>
-                          <Button className="group">
-                            Read now
-                            <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-                          </Button>
-                        </Link>
-                      </div>
-                    </div>
-                  </Card>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section className="py-16 border-b border-border bg-muted/20">
-          <div className="container mx-auto px-4">
-            <div className="max-w-6xl mx-auto">
-              <div className="flex items-center gap-3 mb-8">
-                <TrendingUp className="h-5 w-5 text-primary" />
-                <h2 className="text-3xl font-bold text-foreground">Trending search paths</h2>
-              </div>
-              <div className="grid md:grid-cols-2 xl:grid-cols-4 gap-6">
-                {trendingPosts.map((post) => (
-                  <Card key={post.slug} className="p-6 h-full">
-                    <div className="flex items-center gap-3 mb-4 text-sm text-muted-foreground">
-                      <Badge variant="secondary">{post.category}</Badge>
-                      <ReadingTime minutes={post.readTimeMinutes || parseInt(post.readTime) || 10} />
-                    </div>
-                    <h3 className="text-xl font-semibold mb-3 line-clamp-3">{post.title}</h3>
-                    <p className="text-sm text-muted-foreground mb-5 line-clamp-4">{post.excerpt}</p>
-                    <Link to={post.path} className="inline-flex items-center gap-2 text-primary font-medium hover:underline">
-                      Open article <ArrowRight className="h-4 w-4" />
-                    </Link>
-                  </Card>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section className="py-16 border-b border-border">
-          <div className="container mx-auto px-4">
-            <div className="max-w-6xl mx-auto">
-              <div className="flex items-center justify-between gap-4 mb-8 flex-wrap">
-                <div>
-                  <h2 className="text-3xl font-bold text-foreground">Explore topic clusters</h2>
-                  <p className="text-muted-foreground mt-2">
-                    Organize the library by search intent so readers can move deeper through the funnel instead of bouncing.
-                  </p>
-                </div>
-              </div>
-              <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
-                {topicClusters.map((cluster) => (
-                  <Card key={cluster.category} className="p-6 h-full">
-                    <div className="flex items-center justify-between gap-4 mb-4">
-                      <Badge variant="outline">{cluster.count} articles</Badge>
-                      <button
-                        onClick={() => handleCategoryChange(cluster.category)}
-                        className="text-sm font-medium text-primary hover:underline"
-                      >
-                        Filter this topic
-                      </button>
-                    </div>
-                    <h3 className="text-xl font-semibold mb-3">{cluster.category}</h3>
-                    <p className="text-sm text-muted-foreground mb-5">{cluster.description}</p>
-                    <div className="space-y-3">
-                      {cluster.posts.map((post) => (
-                        <Link
-                          key={post.slug}
-                          to={post.path}
-                          className="block rounded-lg border border-border/60 p-3 hover:border-primary/30 hover:bg-muted/40 transition-colors"
-                        >
-                          <div className="text-sm font-medium line-clamp-2">{post.title}</div>
-                          <div className="mt-1 text-xs text-muted-foreground">
-                            {formatDateUTC(post.modifiedDate || post.date)}
-                          </div>
-                        </Link>
-                      ))}
-                    </div>
-                  </Card>
-                ))}
-              </div>
             </div>
           </div>
         </section>
@@ -259,23 +145,6 @@ const Blog = () => {
         <section className="py-20">
           <div className="container mx-auto px-4">
             <div className="max-w-6xl mx-auto">
-              <div className="flex items-center justify-between gap-4 mb-8 flex-wrap">
-                <div>
-                  <h2 className="text-3xl font-bold text-foreground">All articles</h2>
-                  <p className="text-muted-foreground mt-2">
-                    Browse the full library or jump into the highest-performing evergreen guides below.
-                  </p>
-                </div>
-                <div className="flex flex-wrap gap-2">
-                  {evergreenPosts.slice(0, 2).map((post) => (
-                    <Link key={post.slug} to={post.path}>
-                      <span className="inline-flex items-center rounded-full bg-secondary/10 px-4 py-2 text-sm font-medium text-secondary hover:bg-secondary/20 transition-colors">
-                        {post.title}
-                      </span>
-                    </Link>
-                  ))}
-                </div>
-              </div>
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {currentPosts.map((post) => (
                   <Card key={post.slug} className="overflow-hidden hover:shadow-lg transition-shadow">
@@ -348,6 +217,121 @@ const Blog = () => {
                   </Button>
                 </div>
               )}
+            </div>
+          </div>
+        </section>
+
+        <section className="py-16 border-t border-b border-border">
+          <div className="container mx-auto px-4">
+            <div className="max-w-6xl mx-auto">
+              <div className="flex items-center gap-3 mb-8">
+                <Sparkles className="h-5 w-5 text-secondary" />
+                <h2 className="text-3xl font-bold text-foreground">Start with high-impact guides</h2>
+              </div>
+              <div className="grid lg:grid-cols-3 gap-6">
+                {featuredPosts.map((post) => (
+                  <Card key={post.slug} className="h-full overflow-hidden border-secondary/20 bg-gradient-to-br from-background to-secondary/5">
+                    <div className="p-6 h-full flex flex-col">
+                      <div className="flex items-center justify-between gap-4 text-sm text-muted-foreground mb-4">
+                        <Badge variant="outline">{post.category}</Badge>
+                        <span>{formatDateUTC(post.modifiedDate || post.date)}</span>
+                      </div>
+                      <h2 className="text-2xl font-bold text-foreground mb-3 line-clamp-3">{post.title}</h2>
+                      <p className="text-muted-foreground mb-6 line-clamp-4">{post.excerpt}</p>
+                      <div className="mt-auto flex items-center justify-between">
+                        <ReadingTime minutes={post.readTimeMinutes || parseInt(post.readTime) || 10} />
+                        <Link to={post.path}>
+                          <Button className="group">
+                            Read now
+                            <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                          </Button>
+                        </Link>
+                      </div>
+                    </div>
+                  </Card>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="py-16 border-b border-border bg-muted/20">
+          <div className="container mx-auto px-4">
+            <div className="max-w-6xl mx-auto">
+              <div className="flex items-center gap-3 mb-8">
+                <TrendingUp className="h-5 w-5 text-primary" />
+                <h2 className="text-3xl font-bold text-foreground">Trending search paths</h2>
+              </div>
+              <div className="grid md:grid-cols-2 xl:grid-cols-4 gap-6">
+                {trendingPosts.map((post) => (
+                  <Card key={post.slug} className="p-6 h-full">
+                    <div className="flex items-center gap-3 mb-4 text-sm text-muted-foreground">
+                      <Badge variant="secondary">{post.category}</Badge>
+                      <ReadingTime minutes={post.readTimeMinutes || parseInt(post.readTime) || 10} />
+                    </div>
+                    <h3 className="text-xl font-semibold mb-3 line-clamp-3">{post.title}</h3>
+                    <p className="text-sm text-muted-foreground mb-5 line-clamp-4">{post.excerpt}</p>
+                    <Link to={post.path} className="inline-flex items-center gap-2 text-primary font-medium hover:underline">
+                      Open article <ArrowRight className="h-4 w-4" />
+                    </Link>
+                  </Card>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="py-16 border-b border-border">
+          <div className="container mx-auto px-4">
+            <div className="max-w-6xl mx-auto">
+              <div className="flex items-center justify-between gap-4 mb-8 flex-wrap">
+                <div>
+                  <h2 className="text-3xl font-bold text-foreground">Explore topic clusters</h2>
+                  <p className="text-muted-foreground mt-2">
+                    Keep exploring by topic after you browse the latest articles.
+                  </p>
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  {evergreenPosts.slice(0, 2).map((post) => (
+                    <Link key={post.slug} to={post.path}>
+                      <span className="inline-flex items-center rounded-full bg-secondary/10 px-4 py-2 text-sm font-medium text-secondary hover:bg-secondary/20 transition-colors">
+                        {post.title}
+                      </span>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+              <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
+                {topicClusters.map((cluster) => (
+                  <Card key={cluster.category} className="p-6 h-full">
+                    <div className="flex items-center justify-between gap-4 mb-4">
+                      <Badge variant="outline">{cluster.count} articles</Badge>
+                      <button
+                        onClick={() => handleCategoryChange(cluster.category)}
+                        className="text-sm font-medium text-primary hover:underline"
+                      >
+                        Filter this topic
+                      </button>
+                    </div>
+                    <h3 className="text-xl font-semibold mb-3">{cluster.category}</h3>
+                    <p className="text-sm text-muted-foreground mb-5">{cluster.description}</p>
+                    <div className="space-y-3">
+                      {cluster.posts.map((post) => (
+                        <Link
+                          key={post.slug}
+                          to={post.path}
+                          className="block rounded-lg border border-border/60 p-3 hover:border-primary/30 hover:bg-muted/40 transition-colors"
+                        >
+                          <div className="text-sm font-medium line-clamp-2">{post.title}</div>
+                          <div className="mt-1 text-xs text-muted-foreground">
+                            {formatDateUTC(post.modifiedDate || post.date)}
+                          </div>
+                        </Link>
+                      ))}
+                    </div>
+                  </Card>
+                ))}
+              </div>
             </div>
           </div>
         </section>
