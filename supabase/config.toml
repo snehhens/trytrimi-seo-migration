@@ -1,0 +1,19 @@
+project_id = "sgkjunusitiusmgxufdu"
+
+[functions.sitemap]
+verify_jwt = false
+
+[functions.image-sitemap]
+verify_jwt = false
+
+[functions.sitemap-index]
+verify_jwt = false
+
+[functions.prospect-research]
+verify_jwt = true
+
+[functions.sitemap-monitor]
+verify_jwt = false
+
+[functions.geo-content-editor]
+verify_jwt = true

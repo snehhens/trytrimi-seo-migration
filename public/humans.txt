@@ -1,0 +1,16 @@
+/* TEAM */
+Team: Trimi Medical Team
+Site: https://trytrimi.com
+Location: United States
+
+/* THANKS */
+Technology: React, TypeScript, Tailwind CSS, Supabase
+Platform: Lovable
+Fonts: System fonts for optimal performance
+
+/* SITE */
+Last update: 2025/10/09
+Standards: HTML5, CSS3, ES2020+
+Components: React 18
+Accessibility: WCAG 2.1 AA
+Performance: Core Web Vitals optimized

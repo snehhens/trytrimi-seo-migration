@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Trimi - GLP-1 Weight Loss Blog</title>
+    <link>https://trytrimi.com/blog</link>
+    <description>Expert insights on semaglutide, tirzepatide, and GLP-1 weight loss medications</description>
+    <language>en-us</language>
+    <atom:link href="https://trytrimi.com/rss.xml" rel="self" type="application/rss+xml"/>
+    <lastBuildDate>2024-10-15T00:00:00Z</lastBuildDate>
+  </channel>
+</rss>
