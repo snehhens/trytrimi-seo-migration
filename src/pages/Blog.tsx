@@ -28,6 +28,22 @@ const formatDateUTC = (value: string) =>
     timeZone: "UTC",
   }).format(new Date(`${value}T00:00:00Z`));
 
+const getVisiblePageNumbers = (currentPage: number, totalPages: number) => {
+  if (totalPages <= 7) {
+    return Array.from({ length: totalPages }, (_, index) => index + 1);
+  }
+
+  if (currentPage <= 4) {
+    return [1, 2, 3, 4, 5];
+  }
+
+  if (currentPage >= totalPages - 3) {
+    return [totalPages - 4, totalPages - 3, totalPages - 2, totalPages - 1, totalPages];
+  }
+
+  return [currentPage - 2, currentPage - 1, currentPage, currentPage + 1, currentPage + 2];
+};
+
 const Blog = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
@@ -57,6 +73,7 @@ const Blog = () => {
   const startIndex = (currentPage - 1) * POSTS_PER_PAGE;
   const endIndex = startIndex + POSTS_PER_PAGE;
   const currentPosts = filteredPosts.slice(startIndex, endIndex);
+  const visiblePages = getVisiblePageNumbers(currentPage, totalPages);
   // Reset to page 1 when category changes
   const handleCategoryChange = (category: string) => {
     setSelectedCategory(category);
@@ -72,7 +89,7 @@ const Blog = () => {
     }
   };
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background overflow-x-hidden">
       <GlobalSEO includeSchemas={true} />
       <SEOHead 
         title="Weight Loss Blog | Expert Tips on Semaglutide & Tirzepatide | Trimi"
@@ -91,14 +108,14 @@ const Blog = () => {
       
       <main>
         {/* Hero Section */}
-        <section className="py-20 bg-gradient-to-br from-primary/5 to-secondary/5">
+        <section className="py-14 md:py-20 bg-gradient-to-br from-primary/5 to-secondary/5 overflow-hidden">
           <div className="container mx-auto px-4">
             <div className="max-w-3xl mx-auto text-center">
-              <h1 className="text-5xl md:text-6xl font-bold text-foreground mb-6">
+              <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-foreground mb-6 leading-tight">
                 Weight Loss
                 <span className="block text-secondary mt-2">Insights & Education</span>
               </h1>
-              <p className="text-xl text-muted-foreground">
+              <p className="text-lg sm:text-xl text-muted-foreground">
                 Expert guidance on tirzepatide, semaglutide, and achieving your weight loss goals with science-backed information.
               </p>
             </div>
@@ -106,31 +123,31 @@ const Blog = () => {
         </section>
 
         {/* Category Filter */}
-        <section className="py-12 border-b border-border">
+        <section className="py-10 md:py-12 border-b border-border">
           <div className="container mx-auto px-4">
             <div className="max-w-6xl mx-auto">
               <div className="mb-8 text-center">
                 <h2 className="text-2xl font-semibold text-foreground mb-6">Popular Categories</h2>
                 <div className="flex flex-wrap gap-4 justify-center">
                   <Link to="/blog/category/semaglutide">
-                    <Button variant="outline" className="hover:bg-primary/10" size="lg">
+                    <Button variant="outline" className="hover:bg-primary/10 w-full sm:w-auto" size="lg">
                       View All Semaglutide Articles
                     </Button>
                   </Link>
                   <Link to="/blog/category/tirzepatide">
-                    <Button variant="outline" className="hover:bg-secondary/10" size="lg">
+                    <Button variant="outline" className="hover:bg-secondary/10 w-full sm:w-auto" size="lg">
                       View All Tirzepatide Articles
                     </Button>
                   </Link>
                 </div>
               </div>
-              <div className="flex flex-wrap gap-3 items-center justify-center">
+              <div className="flex flex-wrap gap-2 sm:gap-3 items-center justify-center">
                 <span className="text-sm font-medium text-muted-foreground w-full text-center mb-2">Filter by:</span>
                 {categories.map((category) => (
                   <button
                     key={category}
                     onClick={() => handleCategoryChange(category)}
-                    className={`px-5 py-2.5 rounded-full text-sm font-medium transition-all ${
+                    className={`px-4 py-2 sm:px-5 sm:py-2.5 rounded-full text-xs sm:text-sm font-medium transition-all max-w-full ${
                       selectedCategory === category
                         ? "bg-secondary text-secondary-foreground shadow-sm"
                         : "bg-muted text-muted-foreground hover:bg-secondary/20 hover:text-secondary-foreground"
@@ -185,7 +202,7 @@ const Blog = () => {
 
               {/* Pagination */}
               {totalPages > 1 && (
-                <div className="flex items-center justify-center gap-4 mt-12">
+                <div className="flex flex-wrap items-center justify-center gap-4 mt-12">
                   <Button
                     variant="outline"
                     onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
@@ -196,8 +213,8 @@ const Blog = () => {
                     Previous
                   </Button>
                   
-                  <div className="flex items-center gap-2">
-                    {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
+                  <div className="flex flex-wrap items-center justify-center gap-2">
+                    {visiblePages.map(page => (
                       <Button
                         key={page}
                         variant={currentPage === page ? "default" : "outline"}
@@ -297,7 +314,7 @@ const Blog = () => {
                 <div className="flex flex-wrap gap-2">
                   {evergreenPosts.slice(0, 2).map((post) => (
                     <Link key={post.slug} to={post.path}>
-                      <span className="inline-flex items-center rounded-full bg-secondary/10 px-4 py-2 text-sm font-medium text-secondary hover:bg-secondary/20 transition-colors">
+                      <span className="inline-flex max-w-full items-center rounded-full bg-secondary/10 px-4 py-2 text-sm font-medium text-secondary hover:bg-secondary/20 transition-colors whitespace-normal text-center">
                         {post.title}
                       </span>
                     </Link>
