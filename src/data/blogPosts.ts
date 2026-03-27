@@ -1,3 +1,5 @@
+import { autoDiscoveredBlogPosts } from "@/generated/blog-registry";
+
 export interface BlogPost {
   slug: string;
   title: string;
@@ -10,7 +12,7 @@ export interface BlogPost {
   path: string;
 }
 
-export const blogPosts: BlogPost[] = [
+const manualBlogPosts: BlogPost[] = [
   // New January 2026 Trimi-focused posts
   {
     slug: "trimi-real-world-weight-loss-results",
@@ -1876,6 +1878,13 @@ export const blogPosts: BlogPost[] = [
     readTimeMinutes: 15,
     path: "/blog/tirzepatide-budget-travel-tips"
   }
+];
+
+const manualBlogPostMap = new Map(manualBlogPosts.map((post) => [post.slug, post]));
+
+export const blogPosts: BlogPost[] = [
+  ...manualBlogPosts,
+  ...autoDiscoveredBlogPosts.filter((post) => !manualBlogPostMap.has(post.slug)),
 ];
 
 export const staticPages = [

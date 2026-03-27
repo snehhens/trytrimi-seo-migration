@@ -1,7 +1,8 @@
-import type { GetStaticPaths, GetStaticProps, NextPage } from "next";
+﻿import type { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import dynamic from "next/dynamic";
 import type { ComponentType } from "react";
 import { ItemListSchema } from "@/components/seo/ItemListSchema";
+import { blogComponents as autoDiscoveredBlogComponents } from "@/generated/blog-registry";
 import { getBlogPostBySlug, getRelatedBlogPosts } from "@/lib/blog/discovery";
 import NotFound from "@/pages/NotFound";
 
@@ -16,7 +17,7 @@ import NotFound from "@/pages/NotFound";
  *   - Proper <head> metadata (title, description, OG tags) in the raw HTML
  */
 
-const blogComponents: Record<string, ComponentType> = {
+const manualBlogComponents: Record<string, ComponentType> = {
   "tirzepatide-vs-semaglutide": dynamic(() => import("@/pages/blog/TirzepatideVsSemaglutide")),
   "how-tirzepatide-works": dynamic(() => import("@/pages/blog/HowTirzepatideWorks")),
   "semaglutide-first-month": dynamic(() => import("@/pages/blog/SemaglutideFirstMonth")),
@@ -225,6 +226,11 @@ const blogComponents: Record<string, ComponentType> = {
   "trimi-signup-medical-assessment": dynamic(() => import("@/pages/blog/TrimiSignupMedicalAssessment")),
 };
 
+const blogComponents: Record<string, ComponentType> = {
+  ...autoDiscoveredBlogComponents,
+  ...manualBlogComponents,
+};
+
 interface Props {
   slug: string;
 }
@@ -277,3 +283,4 @@ export const getStaticProps: GetStaticProps<Props> = async ({ params }) => {
 };
 
 export default BlogPostPage;
+

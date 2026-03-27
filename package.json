@@ -5,6 +5,9 @@
   "packageManager": "npm@11.6.2",
   "type": "module",
   "scripts": {
+    "generate:blog-registry": "node scripts/generate-blog-registry.mjs",
+    "predev": "npm run generate:blog-registry",
+    "prebuild": "npm run generate:blog-registry",
     "dev": "next dev --webpack",
     "build": "next build --webpack",
     "build:dev": "next build --webpack",
