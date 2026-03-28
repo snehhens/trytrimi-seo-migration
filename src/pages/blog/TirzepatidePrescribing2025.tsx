@@ -5,7 +5,7 @@ import { MedicalReview } from "@/components/blog/MedicalReview";
 import { RelatedArticles } from "@/components/blog/RelatedArticles";
 import { TopicClusterNav } from "@/components/blog/TopicClusterNav";
 import { getClusterNavigation } from "@/utils/relatedContent";
-import ogImage from "@/assets/og/tirzepatide-prescribing-trends-2025.jpg";
+import ogImage from "@/assets/og/tirzepatide-online-prescription.jpg";
 import { BlogFAQSchema } from "@/components/blog/BlogFAQSchema";
 
 const TirzepatidePrescribing2025 = () => {

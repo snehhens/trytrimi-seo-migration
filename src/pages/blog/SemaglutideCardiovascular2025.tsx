@@ -5,7 +5,7 @@ import { MedicalReview } from "@/components/blog/MedicalReview";
 import { RelatedArticles } from "@/components/blog/RelatedArticles";
 import { TopicClusterNav } from "@/components/blog/TopicClusterNav";
 import { getClusterNavigation } from "@/utils/relatedContent";
-import ogImage from "@/assets/og/semaglutide-cardiovascular-2025.jpg";
+import ogImage from "@/assets/og/semaglutide-blood-pressure.jpg";
 
 const SemaglutideCardiovascular2025 = () => {
   const clusterNav = getClusterNavigation("/blog/semaglutide-cardiovascular-2025");

@@ -6,7 +6,7 @@ import { TableOfContents } from "@/components/blog/TableOfContents";
 import { RelatedArticles } from "@/components/blog/RelatedArticles";
 import { TopicClusterNav } from "@/components/blog/TopicClusterNav";
 import { getClusterNavigation } from "@/utils/relatedContent";
-import ogImage from "@/assets/og/semaglutide-generics-2025.jpg";
+import ogImage from "@/assets/og/semaglutide-compounding-pharmacy.jpg";
 
 const SemaglutideGenerics2025 = () => {
   const clusterNav = getClusterNavigation("/blog/semaglutide-generics-2025");

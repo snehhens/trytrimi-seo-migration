@@ -6,7 +6,7 @@ import { TableOfContents } from "@/components/blog/TableOfContents";
 import { RelatedArticles } from "@/components/blog/RelatedArticles";
 import { TopicClusterNav } from "@/components/blog/TopicClusterNav";
 import { getClusterNavigation } from "@/utils/relatedContent";
-import ogImage from "@/assets/og/affordable-glp1-injections-2025.jpg";
+import ogImage from "@/assets/og/cheap-affordable-glp1.jpg";
 
 const AffordableGLP1Injections2025 = () => {
   const clusterNav = getClusterNavigation("/blog/affordable-glp1-injections-2025");

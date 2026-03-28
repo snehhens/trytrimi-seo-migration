@@ -5,7 +5,7 @@ import { LastUpdated } from "@/components/blog/LastUpdated";
 import { MedicalReview } from "@/components/blog/MedicalReview";
 import { RelatedArticles } from "@/components/blog/RelatedArticles";
 import { getClusterNavigation } from "@/utils/relatedContent";
-import ogImage from "@/assets/og/semaglutide-real-world-2025.jpg";
+import ogImage from "@/assets/og/semaglutide-real-world-results.jpg";
 
 const SemaglutideRealWorld2025 = () => {
   const clusterNav = getClusterNavigation("/blog/semaglutide-real-world-2025");

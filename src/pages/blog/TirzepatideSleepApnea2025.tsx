@@ -5,7 +5,7 @@ import { MedicalReview } from "@/components/blog/MedicalReview";
 import { RelatedArticles } from "@/components/blog/RelatedArticles";
 import { TopicClusterNav } from "@/components/blog/TopicClusterNav";
 import { getClusterNavigation } from "@/utils/relatedContent";
-import ogImage from "@/assets/og/tirzepatide-sleep-apnea-2025.jpg";
+import ogImage from "@/assets/og/tirzepatide-sleep.jpg";
 
 const TirzepatideSleepApnea2025 = () => {
   const clusterNav = getClusterNavigation("/blog/tirzepatide-sleep-apnea-2025");

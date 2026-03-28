@@ -5,7 +5,7 @@ import { MedicalReview } from "@/components/blog/MedicalReview";
 import { RelatedArticles } from "@/components/blog/RelatedArticles";
 import { TopicClusterNav } from "@/components/blog/TopicClusterNav";
 import { getClusterNavigation } from "@/utils/relatedContent";
-import ogImage from "@/assets/og/compounded-semaglutide-risks-2025.jpg";
+import ogImage from "@/assets/og/compounded-semaglutide-safety.jpg";
 
 const CompoundedSemaglutideRisks2025 = () => {
   const clusterNav = getClusterNavigation("/blog/compounded-semaglutide-risks-2025");
