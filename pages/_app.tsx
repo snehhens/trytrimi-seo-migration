@@ -1,6 +1,7 @@
 import type { AppProps } from "next/app";
 import { useEffect } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
@@ -109,6 +110,7 @@ export default function NextApp({ Component, pageProps }: AppProps) {
         <ClientBoot />
         <Component {...pageProps} />
       </ErrorBoundary>
+      <SpeedInsights />
     </QueryClientProvider>
   );
 }
